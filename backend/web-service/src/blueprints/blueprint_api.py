@@ -15,3 +15,10 @@ def test_get():
 def test_post():
     output = {"msg" : "Test POST endpoint from blueprint_api is successful."}
     return jsonify(output)
+
+
+@blueprint_api.route('/create-user', methods=['POST'])
+def create_user():
+    print("Create User")
+    output = {"msg" : "User creation request accepted."}
+    return jsonify(output)
