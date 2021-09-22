@@ -16,3 +16,11 @@ def test_blueprint_api_test_post(api_v1_host):
     json = response.json()
     assert 'msg' in json
     assert json['msg'] == "Test POST endpoint from blueprint_api is successful."
+
+def test_blueprint_api_create_user_post(api_v1_host):
+    endpoint = os.path.join(api_v1_host, 'api', 'create-user').replace("\\", "/")
+    response = requests.post(endpoint)
+    assert response.status_code == 200
+    json = response.json()
+    assert 'msg' in json
+    assert json['msg'] == "User creation request accepted."
