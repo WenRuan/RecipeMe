@@ -5,7 +5,6 @@ class LoginForm extends React.Component {
   render() {
     return(
       <div className="LoginForm">
-        <h1>Hello World</h1>
         <form>
           <label for="fname">First Name:</label>
           <input type="text" id="fname" name="fname"/><br/><br/>
