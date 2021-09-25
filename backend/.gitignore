@@ -1,2 +1,4 @@
 __pycache__
+.pytest_cache
+config_pers.py
 env
