@@ -1,4 +1,9 @@
-CREATE TABLE [IF NOT EXISTS] user (
+CREATE DATABASE `food-thingy-relational`;
+
+---------------------------------------------------------------------------------------------------
+USE `food-thingy-relational`;
+-- Create User Table
+CREATE TABLE IF NOT EXISTS user (
     user_id             INT AUTO_INCREMENT,
     user_name           VARCHAR(255),
 
@@ -9,7 +14,6 @@ CREATE TABLE [IF NOT EXISTS] user (
     
     first_name          VARCHAR(20),
     last_name           VARCHAR(20),
-
     role                VARCHAR(255),
 
     country_code        VARCHAR(10),
@@ -18,4 +22,4 @@ CREATE TABLE [IF NOT EXISTS] user (
     last_pinged         TIMESTAMP,
 
     primary key(user_id)
-);
+); 
