@@ -34,7 +34,6 @@ def login_user():
     
     current_user = user.query.filter_by(user_name=auth.username).first()
     if current_user.verify_user(auth.password):
-        print(current_user.public_id)
         token = jwt.encode({"public_id" : current_user.public_id, "exp" : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], algorithm="HS256")
 
         return jsonify({"token" : token})
