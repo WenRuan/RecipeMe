@@ -8,6 +8,7 @@ from ..app import app
 import jwt
 
 def admin_required(f):
+    """Checks if the user has the admin role."""
     @wraps(f)
     def decorator(*args, **kwargs):
         token = None
