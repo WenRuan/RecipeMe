@@ -4,13 +4,14 @@ import SignUp from './Components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import { Nav } from 'react-bootstrap';
+import { Col, Nav } from 'react-bootstrap';
 import './index.css'
+import Row from 'react-bootstrap/Row'
 
 class App extends React.Component {
   render() {
     return(
-      <Container>
+      <Container fluid className="container-pad">
         <div style={{backgroundColor : 'aquamarine'}}>
           <Navbar bg='danger'>
             <Container>
@@ -24,7 +25,14 @@ class App extends React.Component {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-          <SignUp/>
+
+          <Container>
+            <Row>
+              <Col>Text</Col>
+              <Col></Col>
+              <Col><SignUp/></Col>
+            </Row>
+          </Container>
         </div>
         
       </Container>

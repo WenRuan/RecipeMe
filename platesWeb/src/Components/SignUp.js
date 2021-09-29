@@ -6,9 +6,9 @@ import Container from 'react-bootstrap/Container'
 class SignUp extends React.Component {
   render() {
     return(
-        <Container variant="signup">
+        <Container variant="signup" className="signup-box">
             <h1>Sign Up</h1>
-            <Form>
+            <Form className="form-button-bpad">
             <Form.Text>Please enter the information to create an account</Form.Text>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Enter email" />

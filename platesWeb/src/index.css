@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
-.container-signup{
-  background-color:aquamarine;
+.container-pad{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.signup-box{
+  margin: 4em;
+  background-color: gray;
+}
+
+.form-button-bpad{
+  padding-bottom: 2em;
 }

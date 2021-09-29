@@ -25,7 +25,7 @@ var SignUp = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 Container,
-                { variant: 'signup' },
+                { variant: 'signup', className: 'signup-box' },
                 React.createElement(
                     'h1',
                     null,
@@ -33,7 +33,7 @@ var SignUp = function (_React$Component) {
                 ),
                 React.createElement(
                     Form,
-                    null,
+                    { className: 'form-button-bpad' },
                     React.createElement(
                         Form.Text,
                         null,

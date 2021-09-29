@@ -12,8 +12,9 @@ import SignUp from './Components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { Nav } from 'react-bootstrap';
+import { Col, Nav } from 'react-bootstrap';
 import './index.css';
+import Row from 'react-bootstrap/Row';
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -29,7 +30,7 @@ var App = function (_React$Component) {
     value: function render() {
       return React.createElement(
         Container,
-        null,
+        { fluid: true, className: 'container-pad' },
         React.createElement(
           'div',
           { style: { backgroundColor: 'aquamarine' } },
@@ -65,7 +66,25 @@ var App = function (_React$Component) {
               )
             )
           ),
-          React.createElement(SignUp, null)
+          React.createElement(
+            Container,
+            null,
+            React.createElement(
+              Row,
+              null,
+              React.createElement(
+                Col,
+                null,
+                'Text'
+              ),
+              React.createElement(Col, null),
+              React.createElement(
+                Col,
+                null,
+                React.createElement(SignUp, null)
+              )
+            )
+          )
         )
       );
     }
