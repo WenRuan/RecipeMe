@@ -3,6 +3,48 @@ from passlib.hash import pbkdf2_sha256
 from uuid import uuid4
 
 class user(db.Model):
+    """
+    A class to represent a user
+
+    ...
+    Attributes
+    ----------
+    __tablename__ : str
+        name of table in database
+    user_id : int
+        unique id of the user
+    user_name : str
+        unique display name of the user
+    email : str
+        email associated with the user
+    hashed_password : str
+        hashed password used to verify the user
+    public_id : str
+        publicly used id of the user (used to keep user_id private)
+    first_name : str
+        first name of the user
+    last_name : str
+        last name of the user
+    role : str
+        roles assigned to the user
+    country_code : str
+        code associated with user's country
+    creation_date : str
+        date the user was created
+    last_pinged : str
+        date the user last pinged the server
+    
+    Methods
+    -------
+    create_user(password) -> bool:
+        Inserts self into database.
+
+    verify_user(password) -> bool:
+        Return if passed password verfies against user hashed password.
+
+    return_user_admin_public_info(self) -> dict:
+        Return user data approved for admin usage.
+    """
     __tablename__ = "user"
 
     user_id         = db.Column("user_id",          db.Integer, primary_key = True)
@@ -18,6 +60,7 @@ class user(db.Model):
     last_pinged     = db.Column("last_pinged",      db.String(30))
 
     def __init__ (self, user_name, email, first_name, last_name, role) -> None:
+        """Inits user class with client-passed data."""
         self.user_name = user_name
         self.email = email
         self.user_name = user_name
@@ -26,6 +69,7 @@ class user(db.Model):
         self.role = role
 
     def create_user(self, password) -> bool:
+        """Inserts self into database."""
         self.hashed_password = pbkdf2_sha256.hash(password)
         self.public_id = uuid4()
         if pbkdf2_sha256.verify(password, self.hashed_password):
@@ -36,7 +80,24 @@ class user(db.Model):
             return False
 
     def verify_user(self, password) -> bool:
+        """Return if passed password verfies against user hashed password."""
         if pbkdf2_sha256.verify(password, self.hashed_password):
             return True
         else:
             return False
+
+    def return_user_admin_public_info(self) -> dict:
+        """Return user data approved for admin usage."""
+        result: dict = {}
+
+        result['public_id']     = self.public_id
+        result['user_name']     = self.user_name    
+        result['email']         = self.email 
+        result['first_name']    = self.first_name 
+        result['last_name']     = self.last_name 
+        result['role']          = self.role 
+        result['country_code']  = self.country_code 
+        result['creation_date'] = self.creation_date 
+        result['last_pinged']   = self.last_pinged
+
+        return result
