@@ -64,23 +64,13 @@ def login_user():
 @admin_required
 def query_users(current_user):
     data = user.query.all()
-    user_list = []
+    result: list = []
     for single_user in data:
-        temp_dict = {}
-        temp_dict['user_id'] = single_user.user_id 
-        temp_dict['user_name'] = single_user.user_name 
-        temp_dict['public_id'] = single_user.public_id
-        temp_dict['email'] = single_user.email 
-        temp_dict['first_name'] = single_user.first_name 
-        temp_dict['last_name'] = single_user.last_name 
-        temp_dict['role'] = single_user.role 
-        temp_dict['country_code'] = single_user.country_code 
-        temp_dict['creation_date'] = single_user.creation_date 
-        temp_dict['last_pinged'] = single_user.last_pinged 
+        temp = single_user.return_user_admin_public_info()
         
-        user_list.append(temp_dict)
+        result.append(temp)
 
-    return jsonify(user_list)
+    return jsonify(result)
 
 
 @blueprint_api.route('/query-user/<id>', methods=['GET'])
@@ -88,16 +78,6 @@ def query_users(current_user):
 @admin_required
 def query_single_user(current_user, id):
     data = user.query.filter_by(user_id = id).first_or_404()
-    temp_dict = {}
-    temp_dict['user_id'] = data.user_id 
-    temp_dict['user_name'] = data.user_name 
-    temp_dict['public_id'] = data.public_id
-    temp_dict['email'] = data.email 
-    temp_dict['first_name'] = data.first_name 
-    temp_dict['last_name'] = data.last_name 
-    temp_dict['role'] = data.role 
-    temp_dict['country_code'] = data.country_code 
-    temp_dict['creation_date'] = data.creation_date 
-    temp_dict['last_pinged'] = data.last_pinged 
+    result = data.return_user_admin_public_info()
 
-    return jsonify(temp_dict)
+    return jsonify(result)

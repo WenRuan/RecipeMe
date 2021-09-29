@@ -40,3 +40,19 @@ class user(db.Model):
             return True
         else:
             return False
+
+    def return_user_admin_public_info(self) -> dict:
+        result: dict = {}
+
+        result['user_id']       = self.user_id 
+        result['user_name']     = self.user_name 
+        result['public_id']     = self.public_id
+        result['email']         = self.email 
+        result['first_name']    = self.first_name 
+        result['last_name']     = self.last_name 
+        result['role']          = self.role 
+        result['country_code']  = self.country_code 
+        result['creation_date'] = self.creation_date 
+        result['last_pinged']   = self.last_pinged
+
+        return result
