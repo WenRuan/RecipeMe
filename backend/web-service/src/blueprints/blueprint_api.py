@@ -30,14 +30,17 @@ def login_user():
     """Authenticates user, returns unique JWT."""
     auth = request.authorization
     if not auth or not auth.username or not auth.password:
-        return jsonify({"msg" : "Could not verify."})
+        return jsonify({"msg" : "Could not verify. Missing credentials."}), 401
     
-    current_user = user.query.filter_by(user_name=auth.username).first()
-    if current_user.verify_user(auth.password):
-        token = jwt.encode({"public_id" : current_user.public_id, "exp" : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], algorithm="HS256")
+    try:
+        current_user = user.query.filter_by(user_name=auth.username).first()
+        if current_user.verify_user(auth.password):
+            token = jwt.encode({"public_id" : current_user.public_id, "exp" : datetime.datetime.utcnow() + datetime.timedelta(minutes=45)}, app.config['SECRET_KEY'], algorithm="HS256")
 
-        return jsonify({"token" : token})
-    return jsonify({"msg" : "Could not verify."})
+            return jsonify({"token" : token})
+        return jsonify({"msg" : "Could not verify. Incorrect credentials."}), 401
+    except:
+        return jsonify({"msg" : "Could not verify. Incorrect credentials."}), 401
 
 # Admin routes
 @blueprint_api.route('/create-user', methods=['POST'])
@@ -65,9 +68,12 @@ def create_user(current_user):
     success = new_user.create_user(password)
     if success:
         output = {"msg" : "Create-user POST endpoint from blueprint_api is successful."}
+        code = 201
     else:
         output = {"msg" : "Error during user creation"}
-    return jsonify(output)
+        code = 400
+
+    return jsonify(output), code
 
 
 @blueprint_api.route('/query-all-users', methods=['GET'])
