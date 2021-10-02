@@ -12,8 +12,10 @@ import SignUp from './Components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { Nav } from 'react-bootstrap';
+import { Col, Nav, NavLink } from 'react-bootstrap';
 import './index.css';
+import Row from 'react-bootstrap/Row';
+import MegatronSlogan from './Components/MegatronSlogan';
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -29,19 +31,19 @@ var App = function (_React$Component) {
     value: function render() {
       return React.createElement(
         Container,
-        null,
+        { fluid: true, className: 'container-pad' },
         React.createElement(
           'div',
-          { style: { backgroundColor: 'aquamarine' } },
+          { style: { backgroundColor: '#f5f5f5' } },
           React.createElement(
             Navbar,
-            { bg: 'danger' },
+            { style: { backgroundColor: '#d72836' } },
             React.createElement(
               Container,
               null,
               React.createElement(
                 Navbar.Brand,
-                { href: '#home' },
+                { href: '#home', className: 'cursive-font navbrand-pdright', id: 'brandNavText' },
                 'Plates'
               ),
               React.createElement(Navbar.Toggle, { 'aria-controls': 'basic-navbar-nav' }),
@@ -53,19 +55,33 @@ var App = function (_React$Component) {
                   { className: 'me-auto' },
                   React.createElement(
                     Nav.Link,
-                    { href: '#home' },
+                    { href: '#home', className: 'nav-links white-text' },
                     'Home'
                   ),
                   React.createElement(
                     Nav.Link,
-                    { href: '#about' },
+                    { href: '#about', className: 'nav-links white-text' },
                     'About'
+                  ),
+                  React.createElement(
+                    Nav.Link,
+                    { href: '#services', className: 'nav-links white-text' },
+                    'Services'
+                  )
+                ),
+                React.createElement(
+                  Nav,
+                  null,
+                  React.createElement(
+                    NavLink,
+                    { href: '#login', className: 'nav-links', id: 'login_button' },
+                    'Login'
                   )
                 )
               )
             )
           ),
-          React.createElement(SignUp, null)
+          React.createElement(MegatronSlogan, null)
         )
       );
     }
