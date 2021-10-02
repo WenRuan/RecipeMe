@@ -44,7 +44,7 @@ def login_user():
 
 # Admin routes
 @blueprint_api.route('/create-user', methods=['POST'])
-def create_user(current_user):
+def create_user():
     """
     Creates user object, inserts into database.
     
