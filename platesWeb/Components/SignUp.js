@@ -25,7 +25,7 @@ var SignUp = function (_React$Component) {
             _this.setState(_defineProperty({}, e.target.name, [e.target.value]));
         };
 
-        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '',
+        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '', role: '',
             errors: { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '' }
         };
 
@@ -39,7 +39,8 @@ var SignUp = function (_React$Component) {
         value: function handleSubmit(e) {
             e.preventDefault();
 
-            var formState = { user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password };
+            this.setState({ role: 'none' });
+            var formState = { user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, role: this.state.role };
 
             if (this.validate()) {
 
@@ -54,7 +55,7 @@ var SignUp = function (_React$Component) {
                     body: JSON.stringify(formState)
                 };
 
-                fetch('localhost:5000/api/v1/api/create-user', requestOptions).then(function (response) {
+                fetch('http://127.0.0.1:5000/api/v1/api/create-user', requestOptions).then(function (response) {
                     return response.json;
                 });
             }
@@ -132,36 +133,60 @@ var SignUp = function (_React$Component) {
                         React.createElement(Form.Control, { type: 'text', placeholder: 'Enter username', name: 'user_name', value: this.state.user_name, onChange: this.handleChange }),
                         React.createElement(
                             'div',
-                            null,
+                            { className: 'form-warning' },
                             this.state.errors.user_name
                         )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicEmail' },
-                        React.createElement(Form.Control, { type: 'email', placeholder: 'Enter email', name: 'email', value: this.state.email, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'email', placeholder: 'Enter email', name: 'email', value: this.state.email, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            { className: 'form-warning' },
+                            this.state.errors.email
+                        )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicFName' },
-                        React.createElement(Form.Control, { type: 'text', placeholder: 'First Name', name: 'first_name', value: this.state.first_name, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'text', placeholder: 'First Name', name: 'first_name', value: this.state.first_name, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            { className: 'form-warning' },
+                            this.state.errors.first_name
+                        )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicLName' },
-                        React.createElement(Form.Control, { type: 'text', placeholder: 'Last Name', name: 'last_name', value: this.state.last_name, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'text', placeholder: 'Last Name', name: 'last_name', value: this.state.last_name, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            { className: 'form-warning' },
+                            this.state.errors.last_name
+                        )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicPassword' },
-                        React.createElement(Form.Control, { type: 'password', placeholder: 'Password', name: 'password', value: this.state.password, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'password', placeholder: 'Password', name: 'password', value: this.state.password, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            { className: 'form-warning' },
+                            this.state.errors.password
+                        )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicPasswordCheck' },
-                        React.createElement(Form.Control, { type: 'password', placeholder: 'Re-enter Password', name: 'passwordCheck', value: this.state.passwordCheck, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'password', placeholder: 'Re-enter Password', name: 'passwordCheck', value: this.state.passwordCheck, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            { className: 'form-warning' },
+                            this.state.errors.passwordCheck
+                        )
                     ),
-                    React.createElement('div', { className: 'text-danger' }),
                     React.createElement(
                         Button,
                         { variant: 'primary', type: 'submit' },

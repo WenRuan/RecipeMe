@@ -58,3 +58,7 @@ code {
 #login_button{
   color: #f0f0f0;
 }
+
+.form-warning{
+  color: red;
+}

@@ -7,7 +7,7 @@ class SignUp extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: '',
+        this.state = {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: '', role: '',
         errors: {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: ''}
     };
 
@@ -22,7 +22,8 @@ class SignUp extends React.Component {
     handleSubmit (e){
         e.preventDefault();
 
-        let formState = {user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password};
+        this.setState({role: 'none'})
+        let formState = {user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, role: this.state.role};
 
 
         if(this.validate()){
@@ -38,7 +39,7 @@ class SignUp extends React.Component {
                 body: JSON.stringify(formState)
             }
             
-            fetch('localhost:5000/api/v1/api/create-user', requestOptions)
+            fetch('http://127.0.0.1:5000/api/v1/api/create-user', requestOptions)
                 .then(response => response.json)
         }
 
@@ -103,27 +104,31 @@ class SignUp extends React.Component {
             <Form.Text>Please enter the information to create an account</Form.Text>
             <Form.Group className="mb-3" controlId="formUserName">
                 <Form.Control type="text" placeholder="Enter username" name="user_name" value={this.state.user_name} onChange={this.handleChange}/>
-                <div>{this.state.errors.user_name}</div>
+                <div className="form-warning">{this.state.errors.user_name}</div>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange}/>
+                <div className="form-warning">{this.state.errors.email}</div>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicFName">
                 <Form.Control type="text" placeholder="First Name" name="first_name" value={this.state.first_name} onChange={this.handleChange}/>
+                <div className="form-warning">{this.state.errors.first_name}</div>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicLName">
                 <Form.Control type="text" placeholder="Last Name" name="last_name" value={this.state.last_name} onChange={this.handleChange}/>
+                <div className="form-warning">{this.state.errors.last_name}</div>
             </Form.Group>
         
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange}/>
+                <div className="form-warning">{this.state.errors.password}</div>
             </Form.Group>
  
             <Form.Group className="mb-3" controlId="formBasicPasswordCheck">
                 <Form.Control type="password" placeholder="Re-enter Password" name="passwordCheck" value={this.state.passwordCheck} onChange={this.handleChange}/>
+                <div className="form-warning">{this.state.errors.passwordCheck}</div>
             </Form.Group>
-            <div className="text-danger"></div>
             <Button variant="primary" type="submit">
             Sign Up
             </Button>
