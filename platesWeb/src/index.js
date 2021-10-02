@@ -1,12 +1,10 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import SignUp from './Components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
-import { Col, Nav, NavLink } from 'react-bootstrap';
+import {Nav, NavLink } from 'react-bootstrap';
 import './index.css'
-import Row from 'react-bootstrap/Row'
 import MegatronSlogan from './Components/MegatronSlogan';
 
 class App extends React.Component {

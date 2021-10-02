@@ -22,35 +22,90 @@ var SignUp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).call(this, props));
 
         _this.handleChange = function (e) {
-            _this.setState(_defineProperty({}, e.target.name, e.target.value));
+            _this.setState(_defineProperty({}, e.target.name, [e.target.value]));
         };
 
-        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '' };
+        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '',
+            errors: { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '' }
+        };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
     _createClass(SignUp, [{
         key: 'handleSubmit',
         value: function handleSubmit(e) {
-            var _this2 = this;
-
             e.preventDefault();
-            var signupInfo = {};
 
-            var requestOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer my-token'
-                },
-                body: JSON.stringify({ user_name: this.state })
-            };
+            var formState = { user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password };
 
-            fetch('localhost:5000/api/v1/api/create_user', requestOptions).then(function (response) {
-                return response.json;
-            }).then(function (data) {
-                return _this2.setState({ postId: data.id });
-            });
+            if (this.validate()) {
+
+                alert('A form was submitted: ' + formState);
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer my-token'
+                    },
+                    body: JSON.stringify(formState)
+                };
+
+                fetch('localhost:5000/api/v1/api/create-user', requestOptions).then(function (response) {
+                    return response.json;
+                });
+            }
+        }
+    }, {
+        key: 'validate',
+        value: function validate() {
+            var input = this.state;
+            var isValid = true;
+            var errors = {};
+
+            if (!input["user_name"]) {
+                isValid = false;
+                errors["user_name"] = "Please enter a valid username";
+            }
+
+            if (!input["email"]) {
+                isValid = false;
+                errors["email"] = "Please enter a valid email";
+            }
+
+            if (!input["first_name"]) {
+                isValid = false;
+                errors["first_name"] = "Please enter a first name";
+            }
+
+            if (!input["last_name"]) {
+                isValid = false;
+                errors["last_name"] = "Please enter a last name";
+            }
+
+            if (!input["password"]) {
+                isValid = false;
+                errors["password"] = "Please enter your password";
+            }
+
+            if (!input["passwordCheck"]) {
+                isValid = false;
+                errors["passwordCheck"] = "Please confirm your password";
+            }
+            if (typeof input["password"] !== "undefined" && typeof input["passwordCheck"] !== "undefined") {
+
+                if (input["password"][0] !== input["passwordCheck"][0]) {
+
+                    isValid = false;
+                    errors["password"] = "Passwords don't match";
+                }
+            }
+
+            this.setState({ errors: errors });
+            return isValid;
         }
     }, {
         key: 'render',
@@ -74,33 +129,39 @@ var SignUp = function (_React$Component) {
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formUserName' },
-                        React.createElement(Form.Control, { type: 'text', placeholder: 'Enter username', value: this.state.user_name, onChange: this.handleChange })
+                        React.createElement(Form.Control, { type: 'text', placeholder: 'Enter username', name: 'user_name', value: this.state.user_name, onChange: this.handleChange }),
+                        React.createElement(
+                            'div',
+                            null,
+                            this.state.errors.user_name
+                        )
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicEmail' },
-                        React.createElement(Form.Control, { type: 'email', placeholder: 'Enter email', value: this.state.email })
+                        React.createElement(Form.Control, { type: 'email', placeholder: 'Enter email', name: 'email', value: this.state.email, onChange: this.handleChange })
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicFName' },
-                        React.createElement(Form.Control, { type: 'text', placeholder: 'First Name', value: this.state.first_name })
+                        React.createElement(Form.Control, { type: 'text', placeholder: 'First Name', name: 'first_name', value: this.state.first_name, onChange: this.handleChange })
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicLName' },
-                        React.createElement(Form.Control, { type: 'text', placeholder: 'Last Name', value: this.state.last_name })
+                        React.createElement(Form.Control, { type: 'text', placeholder: 'Last Name', name: 'last_name', value: this.state.last_name, onChange: this.handleChange })
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicPassword' },
-                        React.createElement(Form.Control, { type: 'password', placeholder: 'Password', value: this.state.password })
+                        React.createElement(Form.Control, { type: 'password', placeholder: 'Password', name: 'password', value: this.state.password, onChange: this.handleChange })
                     ),
                     React.createElement(
                         Form.Group,
                         { className: 'mb-3', controlId: 'formBasicPasswordCheck' },
-                        React.createElement(Form.Control, { type: 'passwordCheck', placeholder: 'Re-enter Password' })
+                        React.createElement(Form.Control, { type: 'password', placeholder: 'Re-enter Password', name: 'passwordCheck', value: this.state.passwordCheck, onChange: this.handleChange })
                     ),
+                    React.createElement('div', { className: 'text-danger' }),
                     React.createElement(
                         Button,
                         { variant: 'primary', type: 'submit' },
