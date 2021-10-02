@@ -12,7 +12,7 @@ import SignUp from './Components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { Col, Nav } from 'react-bootstrap';
+import { Col, Nav, NavLink } from 'react-bootstrap';
 import './index.css';
 import Row from 'react-bootstrap/Row';
 import MegatronSlogan from './Components/MegatronSlogan';
@@ -43,7 +43,7 @@ var App = function (_React$Component) {
               null,
               React.createElement(
                 Navbar.Brand,
-                { href: '#home', className: 'cursive-font navbrand-pdright' },
+                { href: '#home', className: 'cursive-font navbrand-pdright', id: 'brandNavText' },
                 'Plates'
               ),
               React.createElement(Navbar.Toggle, { 'aria-controls': 'basic-navbar-nav' }),
@@ -55,18 +55,27 @@ var App = function (_React$Component) {
                   { className: 'me-auto' },
                   React.createElement(
                     Nav.Link,
-                    { href: '#home', className: 'nav-links' },
+                    { href: '#home', className: 'nav-links white-text' },
                     'Home'
                   ),
                   React.createElement(
                     Nav.Link,
-                    { href: '#about', className: 'nav-links' },
+                    { href: '#about', className: 'nav-links white-text' },
                     'About'
                   ),
                   React.createElement(
                     Nav.Link,
-                    { href: '#services', className: 'nav-links' },
+                    { href: '#services', className: 'nav-links white-text' },
                     'Services'
+                  )
+                ),
+                React.createElement(
+                  Nav,
+                  null,
+                  React.createElement(
+                    NavLink,
+                    { href: '#login', className: 'nav-links', id: 'login_button' },
+                    'Login'
                   )
                 )
               )
