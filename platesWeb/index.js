@@ -15,6 +15,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Col, Nav } from 'react-bootstrap';
 import './index.css';
 import Row from 'react-bootstrap/Row';
+import MegatronSlogan from './Components/MegatronSlogan';
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -33,16 +34,16 @@ var App = function (_React$Component) {
         { fluid: true, className: 'container-pad' },
         React.createElement(
           'div',
-          { style: { backgroundColor: 'aquamarine' } },
+          { style: { backgroundColor: '#f5f5f5' } },
           React.createElement(
             Navbar,
-            { bg: 'danger' },
+            { style: { backgroundColor: '#d72836' } },
             React.createElement(
               Container,
               null,
               React.createElement(
                 Navbar.Brand,
-                { href: '#home' },
+                { href: '#home', className: 'cursive-font navbrand-pdright' },
                 'Plates'
               ),
               React.createElement(Navbar.Toggle, { 'aria-controls': 'basic-navbar-nav' }),
@@ -54,37 +55,24 @@ var App = function (_React$Component) {
                   { className: 'me-auto' },
                   React.createElement(
                     Nav.Link,
-                    { href: '#home' },
+                    { href: '#home', className: 'nav-links' },
                     'Home'
                   ),
                   React.createElement(
                     Nav.Link,
-                    { href: '#about' },
+                    { href: '#about', className: 'nav-links' },
                     'About'
+                  ),
+                  React.createElement(
+                    Nav.Link,
+                    { href: '#services', className: 'nav-links' },
+                    'Services'
                   )
                 )
               )
             )
           ),
-          React.createElement(
-            Container,
-            null,
-            React.createElement(
-              Row,
-              null,
-              React.createElement(
-                Col,
-                null,
-                'Text'
-              ),
-              React.createElement(Col, null),
-              React.createElement(
-                Col,
-                null,
-                React.createElement(SignUp, null)
-              )
-            )
-          )
+          React.createElement(MegatronSlogan, null)
         )
       );
     }

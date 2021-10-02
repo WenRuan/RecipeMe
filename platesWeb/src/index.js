@@ -7,32 +7,28 @@ import Navbar from 'react-bootstrap/Navbar'
 import { Col, Nav } from 'react-bootstrap';
 import './index.css'
 import Row from 'react-bootstrap/Row'
+import MegatronSlogan from './Components/MegatronSlogan';
 
 class App extends React.Component {
   render() {
     return(
       <Container fluid className="container-pad">
-        <div style={{backgroundColor : 'aquamarine'}}>
-          <Navbar bg='danger'>
+        <div style={{backgroundColor : '#f5f5f5'}}>
+          <Navbar style={{backgroundColor: '#d72836'}}>
             <Container>
-              <Navbar.Brand href="#home">Plates</Navbar.Brand>
+              <Navbar.Brand href="#home" className="cursive-font navbrand-pdright">Plates</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav"/>
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link href="#home">Home</Nav.Link>
-                  <Nav.Link href="#about">About</Nav.Link>
+                  <Nav.Link href="#home" className="nav-links">Home</Nav.Link>
+                  <Nav.Link href="#about" className="nav-links">About</Nav.Link>
+                  <Nav.Link href="#services" className="nav-links">Services</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
 
-          <Container>
-            <Row>
-              <Col>Text</Col>
-              <Col></Col>
-              <Col><SignUp/></Col>
-            </Row>
-          </Container>
+          <MegatronSlogan/>
         </div>
         
       </Container>
