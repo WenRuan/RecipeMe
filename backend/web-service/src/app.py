@@ -2,10 +2,12 @@
 
 # Load libraries
 from flask import Flask, jsonify
+from flask_cors import CORS
 import sys
 
 # Init Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Load configuration
 app.config.from_object("config.DevelopmentConfig")
