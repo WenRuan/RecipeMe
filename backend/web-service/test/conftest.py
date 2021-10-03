@@ -15,7 +15,7 @@ def api_v1_host(host):
 
 @pytest.fixture(scope="session")
 def py_admin_user():
-    test_user = ("pytest_admin","password!")
+    test_user = ("pytest_test_user","password!")
     return test_user
 
 @pytest.fixture(scope="session")
@@ -39,7 +39,7 @@ def py_test_user():
         "first_name": "Chicken",
         "last_name": "Waang",
         "last_pinged": None,
-        "public_id": "190a6e56-65c4-4d31-aaa4-5eb93b779864",
+        "public_id": "6ac31604-73c2-44f9-8eda-f415d4ff5ccb",
         "role": "admin",
         "user_name": "pytest_test_user"
     }

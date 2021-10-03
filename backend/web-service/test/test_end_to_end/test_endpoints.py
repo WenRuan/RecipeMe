@@ -84,7 +84,7 @@ def test_blueprint_api_create_user_post(api_v1_host, test_user_admin, py_test_ad
 ################################################
 # Testing the query single user route /api/query-user
 def test_blueprint_api_query_single_user(api_v1_host, py_test_user, py_test_admin_token):
-    endpoint = os.path.join(api_v1_host, 'api', 'query-user', '19').replace("\\", "/")
+    endpoint = os.path.join(api_v1_host, 'api', 'query-user', '4').replace("\\", "/")
     # Query User
     response = requests.getresponse = requests.get(endpoint, headers=py_test_admin_token)
     assert response.status_code == 200
