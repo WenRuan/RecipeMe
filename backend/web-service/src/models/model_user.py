@@ -59,7 +59,7 @@ class user(db.Model):
     creation_date   = db.Column("creation_date",    db.String(30))
     last_pinged     = db.Column("last_pinged",      db.String(30))
 
-    def __init__ (self, user_name, email, first_name, last_name, role) -> None:
+    def __init__ (self, user_name, email, first_name, last_name, role = 'basic') -> None:
         """Inits user class with client-passed data."""
         self.user_name = user_name
         self.email = email

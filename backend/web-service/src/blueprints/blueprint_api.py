@@ -47,20 +47,16 @@ def login_user():
 def create_user():
     """
     Creates user object, inserts into database.
-    
-    Requires:
-        JWT verifiable token
-        Admin role
     """
+    print(request.form.to_dict())
     user_name = request.form["user_name"]
     email = request.form["email"]
     password = request.form["password"]
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
-    role = request.form["role"]
 
     # Create new User
-    new_user = user(user_name, email, first_name, last_name, role)
+    new_user = user(user_name, email, first_name, last_name)
     
     # Insert user
     success = new_user.create_user(password)
