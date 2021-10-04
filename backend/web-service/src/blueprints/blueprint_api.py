@@ -48,17 +48,17 @@ def create_user():
     """
     Creates user object, inserts into database.
     """
-    print(request.form.to_dict())
-    user_name = request.form["user_name"]
-    email = request.form["email"]
-    password = request.form["password"]
-    first_name = request.form["first_name"]
-    last_name = request.form["last_name"]
+    json_data = request.get_json()
+    user_name = json_data["user_name"]
+    email = json_data["email"]
+    password = json_data["password"]
+    first_name = json_data["first_name"]
+    last_name = json_data["last_name"]
 
-    # Create new User
+    # # Create new User
     new_user = user(user_name, email, first_name, last_name)
     
-    # Insert user
+    # # Insert user
     success = new_user.create_user(password)
     if success:
         output = {"msg" : "Create-user POST endpoint from blueprint_api is successful."}

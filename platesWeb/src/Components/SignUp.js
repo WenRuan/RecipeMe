@@ -7,7 +7,7 @@ class SignUp extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: '', role: '',
+        this.state = {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: '',
         errors: {user_name: '', email: '', first_name: '', last_name:'', password:'', passwordCheck: ''}
     };
 
@@ -16,31 +16,36 @@ class SignUp extends React.Component {
     }
 
     handleChange = (e) => {
-        this.setState({[e.target.name]:[e.target.value]})
+        this.setState({[e.target.name]:e.target.value})
     }
 
     handleSubmit (e){
         e.preventDefault();
 
-        this.setState({role: 'none'})
-        let formState = {user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, role: this.state.role};
-
-
         if(this.validate()){
 
-            alert('A form was submitted: ' + formState)
+            alert('A form was submitted: ' + this.state)
 
             const requestOptions ={
                 method: 'POST',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer my-token',
                 },
-                body: JSON.stringify(formState)
+                body: JSON.stringify(this.state)
             }
+
+            console.log(JSON.stringify(this.state))
             
             fetch('http://127.0.0.1:5000/api/v1/api/create-user', requestOptions)
-                .then(response => response.json)
+            .then(response => {
+                console.log(requestOptions)        
+                if (response.ok) {
+                    return response.json();
+                  } else {
+                     throw new Error('Something went wrong ...');
+                  }
+             })
         }
 
         

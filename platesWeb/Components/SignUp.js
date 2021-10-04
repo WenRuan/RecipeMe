@@ -22,10 +22,10 @@ var SignUp = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).call(this, props));
 
         _this.handleChange = function (e) {
-            _this.setState(_defineProperty({}, e.target.name, [e.target.value]));
+            _this.setState(_defineProperty({}, e.target.name, e.target.value));
         };
 
-        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '', role: '',
+        _this.state = { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '',
             errors: { user_name: '', email: '', first_name: '', last_name: '', password: '', passwordCheck: '' }
         };
 
@@ -39,24 +39,28 @@ var SignUp = function (_React$Component) {
         value: function handleSubmit(e) {
             e.preventDefault();
 
-            this.setState({ role: 'none' });
-            var formState = { user_name: this.state.user_name, email: this.state.email, first_name: this.state.first_name, last_name: this.state.last_name, password: this.state.password, role: this.state.role };
-
             if (this.validate()) {
 
-                alert('A form was submitted: ' + formState);
+                alert('A form was submitted: ' + this.state);
 
                 var requestOptions = {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer my-token'
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(formState)
+                    body: JSON.stringify(this.state)
                 };
 
+                console.log(JSON.stringify(this.state));
+
                 fetch('http://127.0.0.1:5000/api/v1/api/create-user', requestOptions).then(function (response) {
-                    return response.json;
+                    console.log(requestOptions);
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong ...');
+                    }
                 });
             }
         }
